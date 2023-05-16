@@ -40,12 +40,17 @@ for epoch in range(num_epochs):
 torch.save(model, 'weights/best.pth') """
 
 # Prueba del modelo
+device = torch.device('cuda:0')
 model = torch.load('weights/best.pth')
+model.to(device)
 model.eval()
+
 with torch.no_grad():
     correct = 0
     total = 0
     for images, labels in test_loader:
+        images = images.to(device)
+        labels = labels.to(device)
         with profile(activities=[ ProfilerActivity.CPU, ProfilerActivity.CUDA],  profile_memory=True,record_shapes=True) as prof:
             with record_function("model_inference"):
                 outputs = model(images)
