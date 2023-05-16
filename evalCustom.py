@@ -4,7 +4,8 @@ import torch.optim as optim
 import torchvision.datasets as datasets
 import torchvision.transforms as transforms
 from torch.utils.data import DataLoader
-import time
+
+from torch.profiler import profile, record_function, ProfilerActivity
 
 from models.customNet import ConvNet
 
@@ -41,18 +42,17 @@ torch.save(model, 'weights/best.pth') """
 # Prueba del modelo
 model = torch.load('weights/best.pth')
 model.eval()
-tiempos = 0
 with torch.no_grad():
     correct = 0
     total = 0
     for images, labels in test_loader:
-        start = time.time()
-        outputs = model(images)
-        torch.cuda.synchronize() 
-        end = time.time()
-        tiempos += (end-start)
+        with profile(activities=[ ProfilerActivity.CPU, ProfilerActivity.CUDA],  profile_memory=True,record_shapes=True) as prof:
+            with record_function("model_inference"):
+                outputs = model(images)
+        print(prof.key_averages().table(sort_by="cuda_time_total", row_limit=10))
+        torch.cuda.synchronize()
         _, predicted = torch.max(outputs.data, 1)
         total += labels.size(0)
         correct += (predicted == labels).sum().item()
-    print('Tiempo avg : ', tiempos / total, ' segundos')
+        break
     print('Test Accuracy of the model on the 10000 test images: {} %'.format(100 * correct / total))

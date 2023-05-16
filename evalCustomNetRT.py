@@ -2,7 +2,8 @@ import torch
 import torchvision.datasets as datasets
 import torchvision.transforms as transforms
 from torch.utils.data import DataLoader
-import time
+
+from torch.profiler import profile, record_function, ProfilerActivity
 
 from models import engine
 import os
@@ -25,21 +26,19 @@ Engine.set_desired(['outputs'])
 model = Engine
 
 #with torch.no_grad():
-tiempos = 0
 with torch.set_grad_enabled(False):
     correct = 0
     total = 0
     for images, labels in test_loader:
         images = images.to(device)
         labels = labels.to(device)
-        start = time.time()
-        outputs = model(images)
-        end = time.time()
-        tiempos += (end-start)
+        with profile(activities=[ ProfilerActivity.CPU, ProfilerActivity.CUDA], profile_memory=True, record_shapes=True) as prof:
+            with record_function("model_inference"):
+                outputs = model(images)
+        print(prof.key_averages().table(sort_by="cuda_time_total", row_limit=10))
         _, predicted = torch.max(outputs.data, 1)
         if( predicted.size() == labels.size() ):
             total += labels.size(0)
             correct += (predicted == labels).sum().item()
-
-    print('Tiempo avg : ', tiempos / total, ' segundos')
+        break
     print('Test Accuracy of the model on the 10000 test images: {} %'.format(100 * correct / total))
