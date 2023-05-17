@@ -13,7 +13,7 @@ correr red optimizada con TRT: `python3 evalCustomNetRT.py`
 |             | model inference |        |                |              |48.00%               |100%         |           ||
 |             | cudaLaunchKernel|        |                |              |26.81%               |0%           |15         ||
 |             | cudaFree        |        |                |              |11.68%               |0%           |4          ||
-| TRT fp16    |                 |1.1     | 5.425          |72.00         |100%                 |             |           |            |
+| TRT fp16    |                 |1.1     | 5.425          |72.00         |100%                 |100%         |           |100%        |
 |             | model inference |        |                |              |0%                   |100%         |           ||
 |             | cudaLaunchKernel|        |                |              |63.14%               |0%           |3          ||
 |             | cudaFree        |        |                |              |36.18%               |0%           |2          ||
