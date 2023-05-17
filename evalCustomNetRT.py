@@ -11,11 +11,11 @@ import os
 ## Carga de los datos
 transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.1307,), (0.3081,))])
 
-train_dataset = datasets.MNIST(root='./data', train=True, download=True, transform=transform)
+#train_dataset = datasets.MNIST(root='./data', train=True, download=True, transform=transform)
 test_dataset = datasets.MNIST(root='./data', train=False, transform=transform)
 
-train_loader = DataLoader(dataset=train_dataset, batch_size=64, shuffle=True)
-test_loader = DataLoader(dataset=test_dataset, batch_size=64, shuffle=False)
+#train_loader = DataLoader(dataset=train_dataset, batch_size=64, shuffle=True)
+test_loader = DataLoader(dataset=test_dataset, batch_size=128, shuffle=False)
 
 ## Prueba del modelo
 device = torch.device('cuda:0')

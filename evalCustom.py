@@ -9,21 +9,21 @@ from torch.profiler import profile, record_function, ProfilerActivity
 
 from models.customNet import ConvNet
 
-# Inicialización del modelo
+## Inicialización del modelo
 model = ConvNet()
 
-# Definición del optimizador y la función de pérdida
-optimizer = optim.Adam(model.parameters(), lr=0.001)
-loss_function = nn.CrossEntropyLoss()
+## Definición del optimizador y la función de pérdida
+#optimizer = optim.Adam(model.parameters(), lr=0.001)
+#loss_function = nn.CrossEntropyLoss()
 
 ## Carga de los datos
 transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.1307,), (0.3081,))])
 
-train_dataset = datasets.MNIST(root='./data', train=True, download=True, transform=transform)
+#train_dataset = datasets.MNIST(root='./data', train=True, download=True, transform=transform)
 test_dataset = datasets.MNIST(root='./data', train=False, transform=transform)
 
-train_loader = DataLoader(dataset=train_dataset, batch_size=64, shuffle=True)
-test_loader = DataLoader(dataset=test_dataset, batch_size=64, shuffle=False)
+#train_loader = DataLoader(dataset=train_dataset, batch_size=64, shuffle=True)
+test_loader = DataLoader(dataset=test_dataset, batch_size=128, shuffle=False)
 
 """ ## Entrenamiento del modelo
 num_epochs = 10
@@ -51,7 +51,7 @@ with torch.no_grad():
     for images, labels in test_loader:
         images = images.to(device)
         labels = labels.to(device)
-        with profile(activities=[ProfilerActivity.CPU, ProfilerActivity.CUDA], profile_memory=True) as prof:
+        with profile(activities=[ProfilerActivity.CPU, ProfilerActivity.CUDA]) as prof:
             #with record_function("model_inference"):
                 outputs = model(images)
                 #torch.cuda.synchronize()
