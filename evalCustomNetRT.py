@@ -33,7 +33,7 @@ with torch.set_grad_enabled(False):
         images = images.to(device)
         labels = labels.to(device)
         with profile(activities=[ProfilerActivity.CPU, ProfilerActivity.CUDA], profile_memory=True) as prof:
-            with record_function("model_inference"):
+            #with record_function("model_inference"):
                 outputs = model(images)
         print(prof.key_averages().table(sort_by="cuda_time_total"))
         prof.export_chrome_trace("trace_RT.json")

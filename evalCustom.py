@@ -52,11 +52,11 @@ with torch.no_grad():
         images = images.to(device)
         labels = labels.to(device)
         with profile(activities=[ProfilerActivity.CPU, ProfilerActivity.CUDA], profile_memory=True) as prof:
-            with record_function("model_inference"):
+            #with record_function("model_inference"):
                 outputs = model(images)
+                #torch.cuda.synchronize()
         print(prof.key_averages().table(sort_by="cuda_time_total"))
         prof.export_chrome_trace("trace_Vanilla.json")
-        torch.cuda.synchronize()
         _, predicted = torch.max(outputs.data, 1)
         total += labels.size(0)
         correct += (predicted == labels).sum().item()
