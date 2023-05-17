@@ -32,10 +32,11 @@ with torch.set_grad_enabled(False):
     for images, labels in test_loader:
         images = images.to(device)
         labels = labels.to(device)
-        with profile(activities=[ ProfilerActivity.CPU, ProfilerActivity.CUDA], profile_memory=True, record_shapes=True) as prof:
+        with profile(activities=[ProfilerActivity.CPU, ProfilerActivity.CUDA], profile_memory=True) as prof:
             with record_function("model_inference"):
                 outputs = model(images)
-        print(prof.key_averages().table(sort_by="cuda_time_total", row_limit=10))
+        print(prof.key_averages().table(sort_by="cuda_time_total"))
+        prof.export_chrome_trace("trace_RT.json")
         _, predicted = torch.max(outputs.data, 1)
         if( predicted.size() == labels.size() ):
             total += labels.size(0)
