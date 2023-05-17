@@ -7,16 +7,16 @@ correr red optimizada con TRT: `python3 evalCustomNetRT.py`
 # Resultados
 
 
-|  Model      | Name            |size MB | Time CPU (ms)  |Time CUDA (us)|Time CPU %           | Time CUDA % |# of calls | accuracy % | 
-|-------------|-----------------|--------|----------------|--------------|---------------------|-------------|-----------|------------|
-| Vanilla     |                 |1.7     | 87.000         |351.000       |100%                 |100%         |           |100%        |
-|             | model inference |        |                |              |48.00%               |100%         |           ||
-|             | cudaLaunchKernel|        |                |              |26.81%               |0%           |15         ||
-|             | cudaFree        |        |                |              |11.68%               |0%           |4          ||
-| TRT fp16    |                 |1.1     | 5.425          |72.00         |100%                 |100%         |           |100%        |
-|             | model inference |        |                |              |0%                   |100%         |           ||
-|             | cudaLaunchKernel|        |                |              |63.14%               |0%           |3          ||
-|             | cudaFree        |        |                |              |36.18%               |0%           |2          ||
+|  Model      | Name            |size MB |Time CPU %           | Time CUDA % |# of calls | accuracy % | 
+|-------------|-----------------|--------|---------------------|-------------|-----------|------------|
+| Vanilla     |                 |1.7     |100% (87 ms)         |100% (351 us)|           |100%        |
+|             | model inference |        |48.00%               |100%         |           ||
+|             | cudaLaunchKernel|        |26.81%               |0%           |15         ||
+|             | cudaFree        |        |11.68%               |0%           |4          ||
+| TRT fp16    |                 |1.1     |100% (5.425 ms)      |100% (72 us) |           |100%        |
+|             | model inference |        |0%                   |100%         |           ||
+|             | cudaLaunchKernel|        |63.14%               |0%           |3          ||
+|             | cudaFree        |        |36.18%               |0%           |2          ||
 
 
 ---
