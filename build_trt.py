@@ -11,7 +11,7 @@ def parse_args():
     parser.add_argument('--input_shape',
                         nargs='+',
                         type=int,
-                        default=[128,1, 28, 28],
+                        default=[4096,1, 28, 28],
                         help='Model input shape, el primer valor es el batch_size, 128)]')
     parser.add_argument('--fp32',
                         action='store_true',

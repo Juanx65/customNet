@@ -39,5 +39,7 @@ obs: * resultados obtenidos corriendo las redes en un solo batch de 64/128 image
 
 # Referencias
 
+* pytorch profiler stable: `https://pytorch.org/docs/stable/profiler.html`
 * profiler pytorch: `https://pytorch.org/tutorials/recipes/recipes/profiler_recipe.html`
 * profiler pytorch blog: `https://levelup.gitconnected.com/pytorch-official-blog-detailed-pytorch-profiler-v1-9-7a5ca991a97b`
+* profiler tensor board: `https://pytorch.org/tutorials/intermediate/tensorboard_profiler_tutorial.html`

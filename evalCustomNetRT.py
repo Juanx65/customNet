@@ -15,7 +15,7 @@ transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.1
 test_dataset = datasets.MNIST(root='./data', train=False, transform=transform)
 
 #train_loader = DataLoader(dataset=train_dataset, batch_size=64, shuffle=True)
-test_loader = DataLoader(dataset=test_dataset, batch_size=128, shuffle=False)
+test_loader = DataLoader(dataset=test_dataset, batch_size=4096, shuffle=False)
 
 ## Prueba del modelo
 device = torch.device('cuda:0')
@@ -29,17 +29,20 @@ model = Engine
 with torch.set_grad_enabled(False):
     correct = 0
     total = 0
-    for images, labels in test_loader:
-        images = images.to(device)
-        labels = labels.to(device)
-        with profile(activities=[ProfilerActivity.CPU, ProfilerActivity.CUDA], profile_memory=True) as prof:
-            #with record_function("model_inference"):
-                outputs = model(images)
-        print(prof.key_averages().table(sort_by="cuda_time_total"))
-        prof.export_chrome_trace("trace_RT.json")
-        _, predicted = torch.max(outputs.data, 1)
-        if( predicted.size() == labels.size() ):
-            total += labels.size(0)
-            correct += (predicted == labels).sum().item()
-        break
+    with profile(activities=[ProfilerActivity.CPU, ProfilerActivity.CUDA],
+                 profile_memory=True,
+                 record_shapes=True,
+                 with_stack=True,
+                 on_trace_ready=torch.profiler.tensorboard_trace_handler('./log/log_trt')) as prof:
+        for images, labels in test_loader:
+            images = images.to(device)
+            labels = labels.to(device)
+            outputs = model(images)
+            _, predicted = torch.max(outputs.data, 1)
+            if( predicted.size() == labels.size() ):
+                total += labels.size(0)
+                correct += (predicted == labels).sum().item()
+            prof.step()
+    print(prof.key_averages().table(sort_by="cuda_time_total"))
+    #prof.export_chrome_trace("trace_RT.json")
     print('Test Accuracy of the model on the 10000 test images: {} %'.format(100 * correct / total))
