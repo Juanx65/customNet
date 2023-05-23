@@ -4,8 +4,83 @@ correr red normal: `python3 evalCustom.py`
 
 correr red optimizada con TRT: `python3 evalCustomNetRT.py`
 
+para poder ver los logs generados en los profilers: `tensorboard --logdir=./log`, luego en el navegador de chrome, buscar `http://localhost:6006/`
+
 # Resultados
 
+## TensorBoard Profiler
+Estos resultados son obtenidos al correr todo el dataset de purebas (~ 10000 imagenes).
+### summary table batch size 2048
+
+|  Model      | Stage           |Time duration (us)    | Percentage (%) | 
+|-------------|-----------------|----------------------|----------------|
+| Vanilla     |                 |  1.084.332           |100             |     
+|             | Kernel          |  39.064              | 3,6            |
+|             | Memcpy          |  9.708               | 0,9            |
+|             | CPU Exec        |  436.668             | 40,27          |
+|             | Other           |  598.889             | 55.23          |
+| TRT fp16    |                 |  972.304             |100             |
+|             | Kernel          |  17.783              |1,83            |        
+|             | Memcpy          |  9.710               |1               |     
+|             | CPU Exec        |  344.756             |35,46           |
+|             | Other           |  600.055             |61.71           |
+
+* obs: Kernel: kernel execution time on GPU device;
+       Memcpy: GPU involved memory compy time;
+       Memset: GPU involved memory set time;
+       Runtime: CUDA runtime execution time on host side (such as cudaLaunchKernel);
+       DataLoader: The data loading time spent in PyTorch DataLoader object;
+       CPU Exec: Host compute time, including every Pytorch operator running time;
+       Other: time not incuded in the above
+* obs: los que no aparecen en la tabla son porque son 0%
+### vanilla trace batch size 2048
+
+<div align="center">
+      <a href="">
+     <img
+      src="img_readme/trace_vanilla.png"
+      alt="Trace Vanilla"
+      style="width:70%;">
+      </a>
+</div>
+
+### trt trace batch size 2048
+
+<div align="center">
+      <a href="">
+     <img
+      src="img_readme/trace_trt.png"
+      alt="Trace trt"
+      style="width:70%;">
+      </a>
+</div>
+
+---
+
+### vanilla mem batch size 2048
+
+<div align="center">
+      <a href="">
+     <img
+      src="img_readme/memory_vanilla.png"
+      alt="Trace Vanilla"
+      style="width:70%;">
+      </a>
+</div>
+
+### trt mem batch size 2048
+
+<div align="center">
+      <a href="">
+     <img
+      src="img_readme/memory_trt.png"
+      alt="Trace trt"
+      style="width:70%;">
+      </a>
+</div>
+
+---
+## tablas antiguas
 ### CustomNet batch size 64
 |  Model      | Stage           |size MB |Time CPU %           | Time CUDA % |# of calls | accuracy % | 
 |-------------|-----------------|--------|---------------------|-------------|-----------|------------|
