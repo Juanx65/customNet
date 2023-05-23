@@ -12,18 +12,23 @@ para poder ver los logs generados en los profilers: `tensorboard --logdir=./log`
 Estos resultados son obtenidos al correr todo el dataset de purebas (~ 10000 imagenes).
 ### summary table batch size 2048
 
-|  Model      | Stage           |Time duration (us)    | Percentage (%) | 
-|-------------|-----------------|----------------------|----------------|
-| Vanilla     |                 |  1.084.332           |100             |     
-|             | Kernel          |  39.064              | 3,6            |
-|             | Memcpy          |  9.708               | 0,9            |
-|             | CPU Exec        |  436.668             | 40,27          |
-|             | Other           |  598.889             | 55.23          |
-| TRT fp16    |                 |  972.304             |100             |
-|             | Kernel          |  17.783              |1,83            |        
-|             | Memcpy          |  9.710               |1               |     
-|             | CPU Exec        |  344.756             |35,46           |
-|             | Other           |  600.055             |61.71           |
+|  Model      | Stage           |Time duration (us)    | Percentage (%) |  size (MB)| accuracy (%)|
+|-------------|-----------------|----------------------|----------------|-----------|-------------|
+| Vanilla     |                 |  1.084.332           |100             |1,7        |99.2         |     
+|             | Kernel          |  39.064              | 3,6            |||
+|             | Memcpy          |  9.708               | 0,9            |||
+|             | CPU Exec        |  436.668             | 40,27          |||
+|             | Other           |  598.889             | 55.23          |||
+| TRT fp16    |                 |  972.304             |100             |1,1        |99.18        |
+|             | Kernel          |  17.783              |1,83            |||        
+|             | Memcpy          |  9.710               |1               |||     
+|             | CPU Exec        |  344.756             |35,46           |||
+|             | Other           |  600.055             |61.71           |||
+| TRT fp32    |                 |  1,091,613           |100             |2,1        |98.97         |
+|             | Kernel          |  19,417              |1.78            |||        
+|             | Memcpy          |  9,722               |0.89            |||     
+|             | CPU Exec        |  414,413             |37.96           |||
+|             | Other           |  648,061             |59.37           |||
 
 * obs: Kernel: kernel execution time on GPU device;
        Memcpy: GPU involved memory compy time;
