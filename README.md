@@ -33,6 +33,9 @@ Estos resultados son obtenidos al correr todo el dataset de purebas (~ 10000 ima
        CPU Exec: Host compute time, including every Pytorch operator running time;
        Other: time not incuded in the above
 * obs: los que no aparecen en la tabla son porque son 0%
+
+--- 
+
 ### vanilla trace batch size 2048
 
 <div align="center">
@@ -40,7 +43,7 @@ Estos resultados son obtenidos al correr todo el dataset de purebas (~ 10000 ima
      <img
       src="img_readme/trace_vanilla.png"
       alt="Trace Vanilla"
-      style="width:70%;">
+      style="width:100%;">
       </a>
 </div>
 
@@ -51,7 +54,7 @@ Estos resultados son obtenidos al correr todo el dataset de purebas (~ 10000 ima
      <img
       src="img_readme/trace_trt.png"
       alt="Trace trt"
-      style="width:70%;">
+      style="width:100%;">
       </a>
 </div>
 
@@ -64,7 +67,7 @@ Estos resultados son obtenidos al correr todo el dataset de purebas (~ 10000 ima
      <img
       src="img_readme/memory_vanilla.png"
       alt="Trace Vanilla"
-      style="width:70%;">
+      style="width:100%;">
       </a>
 </div>
 
@@ -75,7 +78,7 @@ Estos resultados son obtenidos al correr todo el dataset de purebas (~ 10000 ima
      <img
       src="img_readme/memory_trt.png"
       alt="Trace trt"
-      style="width:70%;">
+      style="width:100%;">
       </a>
 </div>
 
