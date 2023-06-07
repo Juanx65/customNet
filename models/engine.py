@@ -37,6 +37,7 @@ HEIGHT = 28
 WIDTH = 28
 
 BATCH_SIZE = 128
+BATCH_SIZE_CALIBRATION = 1
 
 CACHE_FOLDER = "cache/"
 
@@ -87,10 +88,10 @@ class EngineBuilder:
             if int8 and self.builder.platform_has_fast_int8:
                 ## Carga de los datos
                 #transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.1307,), (0.3081,))])
-                calibration_file = get_calibration_files(calibration_data="mnist_png/", max_calibration_size=512)
+                calibration_file = get_calibration_files(calibration_data="mnist_png/")
                 Int8_calibrator = ImagenetCalibrator(calibration_files=calibration_file, preprocess_func=processing.preprocess_mnist)
 
-                builder.max_batch_size = 128                                                                                                        
+                #builder.max_batch_size = 128                                                                                                        
                 #builder.max_workspace_size = common.GiB(100)     
                 config.set_flag(trt.BuilderFlag.INT8)
                 config.int8_calibrator = Int8_calibrator
