@@ -2,16 +2,18 @@ import argparse
 
 from models.engine import EngineBuilder
 
+BATCH_SIZE = 4096
+
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('--weights',
                         type=str,
-                        default='weights/best.onnx',
+                        default='weights/best4096.onnx',
                         help='Weights file')
     parser.add_argument('--input_shape',
                         nargs='+',
                         type=int,
-                        default=[4096,1, 28, 28],
+                        default=[BATCH_SIZE,1, 28, 28],
                         help='Model input shape, el primer valor es el batch_size, 128)]')
     parser.add_argument('--fp32',
                         action='store_true',

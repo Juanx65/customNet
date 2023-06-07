@@ -1,8 +1,25 @@
+# Entrenar la red 
+
+Usar codigo en `evalCustom.py`, obs: es necesario descomentar la parte que dice "Entrenamiento del modelo" -- ya hare un archivo aparte.
+
+# Construir ONNX
+
+Correr `onnx_transform.py`, recorad cambiar el BATCH_SIZE segun sea necesario.
+
+# Construir ENGINEE
+
+Correr `build_trt.py`, tmb recuerde cambiar BATCH_SIZE, asi como especificar si desa fp32, fp16 o INT8
+
+```
+build_trt.py --int8 --input_shape=[128,1, 28, 28] --weights='weights/best128.onnx'
+``` 
+obs: 128 corresponde al batch size
+
 # Pruebas de TensorRT en una red custom usando pytorch
 
-correr red normal: `python3 evalCustom.py`
+correr red normal: `python evalCustom.py`
 
-correr red optimizada con TRT: `python3 evalCustomNetRT.py`
+correr red optimizada con TRT: `python evalCustomNetRT.py`
 
 para poder ver los logs generados en los profilers: `tensorboard --logdir=./log`, luego en el navegador de chrome, buscar `http://localhost:6006/`
 
@@ -126,3 +143,5 @@ obs: * resultados obtenidos corriendo las redes en un solo batch de 64/128 image
 * profiler pytorch: `https://pytorch.org/tutorials/recipes/recipes/profiler_recipe.html`
 * profiler pytorch blog: `https://levelup.gitconnected.com/pytorch-official-blog-detailed-pytorch-profiler-v1-9-7a5ca991a97b`
 * profiler tensor board: `https://pytorch.org/tutorials/intermediate/tensorboard_profiler_tutorial.html`
+* INT8 calibration examples: `https://forums.developer.nvidia.com/t/tensorrt-5-int8-calibration-example/71828/9`
+* INT8 calibration github example: `https://github.com/rmccorm4/tensorrt-utils/blob/master/int8/calibration/ImagenetCalibrator.py`

@@ -8,6 +8,8 @@ from torch.profiler import profile, record_function, ProfilerActivity
 from models import engine
 import os
 
+BATCH_SIZE = 4096
+
 ## Carga de los datos
 transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.1307,), (0.3081,))])
 
@@ -15,12 +17,12 @@ transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.1
 test_dataset = datasets.MNIST(root='./data', train=False, transform=transform)
 
 #train_loader = DataLoader(dataset=train_dataset, batch_size=64, shuffle=True)
-test_loader = DataLoader(dataset=test_dataset, batch_size=4096, shuffle=False)
+test_loader = DataLoader(dataset=test_dataset, batch_size=BATCH_SIZE, shuffle=False)
 
 ## Prueba del modelo
 device = torch.device('cuda:0')
 current_directory = os.path.dirname(os.path.abspath(__file__))
-engine_path = os.path.join(current_directory,'weights/best.engine')
+engine_path = os.path.join(current_directory,'weights/best4096_int8.engine')
 Engine = engine.TRTModule(engine_path, device)
 Engine.set_desired(['outputs'])
 model = Engine
@@ -33,7 +35,7 @@ with torch.set_grad_enabled(False):
                  profile_memory=True,
                  record_shapes=True,
                  with_stack=True,
-                 on_trace_ready=torch.profiler.tensorboard_trace_handler('./log/log_trt')) as prof:
+                 on_trace_ready=torch.profiler.tensorboard_trace_handler('./log/log_trt_int8')) as prof:
         for images, labels in test_loader:
             images = images.to(device)
             labels = labels.to(device)

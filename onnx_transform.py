@@ -4,6 +4,8 @@ from io import BytesIO
 
 from models.customNet import ConvNet
 
+BATCH_SIZE = 4096
+
 # Ruta al archivo .hdf5 con los pesos
 weights_path = 'weights/best.pth'
 
@@ -12,7 +14,7 @@ weights_path = 'weights/best.pth'
 model = torch.load(weights_path)
 model.to('cuda:0')
 model.eval()
-fake_input = torch.randn([4096,1, 28, 28]).to('cuda:0')
+fake_input = torch.randn([BATCH_SIZE,1, 28, 28]).to('cuda:0')
 for _ in range(2):
     model(fake_input)
 save_path = weights_path.replace('.pth', '.onnx')

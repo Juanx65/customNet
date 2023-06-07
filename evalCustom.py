@@ -9,6 +9,8 @@ from torch.profiler import profile, record_function, ProfilerActivity
 
 from models.customNet import ConvNet
 
+BATCH_SIZE = 4096
+
 ## Inicialización del modelo
 model = ConvNet()
 
@@ -23,7 +25,7 @@ transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.1
 test_dataset = datasets.MNIST(root='./data', train=False, transform=transform)
 
 #train_loader = DataLoader(dataset=train_dataset, batch_size=64, shuffle=True)
-test_loader = DataLoader(dataset=test_dataset, batch_size=4096, shuffle=False)
+test_loader = DataLoader(dataset=test_dataset, batch_size=BATCH_SIZE, shuffle=False)
 
 """ ## Entrenamiento del modelo
 num_epochs = 10
