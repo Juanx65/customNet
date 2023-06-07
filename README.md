@@ -15,10 +15,16 @@ build_trt.py --int8 --input_shape=[128,1, 28, 28] --weights='weights/best128.onn
 ``` 
 obs: 128 corresponde al batch size
 
+---
+
+obs: para construir con INT8 fue necesario crear una funcion de preprocesamiento de imagenes para la calibracion del engine en int8, esta funcion de pre procesamiento se encuentra en `processing.py`y depende de como fue entrenado el dataset, ahi aplique la misma normalizacion aplicada al entrenar el modelo dando buenos resultados.
+
+obs: el codigo para la calibracion de int8 por ahora se encuentra en `models/engine.py` quizas dsp lo ordene mejor.
+
 # Pruebas de TensorRT en una red custom usando pytorch
 
 correr red normal: `python evalCustom.py`
-
+ 
 correr red optimizada con TRT: `python evalCustomNetRT.py`
 
 para poder ver los logs generados en los profilers: `tensorboard --logdir=./log`, luego en el navegador de chrome, buscar `http://localhost:6006/`
