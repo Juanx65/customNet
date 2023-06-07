@@ -2,3 +2,5 @@ data/*
 datasets/*
 weights/*
 log/*
+mnist_png/*
+cache/*
