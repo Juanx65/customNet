@@ -142,6 +142,44 @@ Estos resultados son obtenidos al correr todo el dataset de purebas (~ 10000 ima
 obs: * resultados obtenidos corriendo las redes en un solo batch de 64/128 imagenes.
     * El tamaño del modelo Vanilla hace referencia al modelo pasado a onnx.
     * Stage inference hace referencia al tiempo de procesamiento usado en las capas de la red para la inferenica en las imagenes
+    
+# Instalacion de SO en Jetson Xavier AGX
+
+## instalar mediante JetPack SDK Manager:
+
+* instalar SDK Manager mediante este link: `https://developer.nvidia.com/sdk-manager`
+
+obs: es necesario tener SO Ubuntu 20.04, ya que no acepta una version posterior.
+
+* Conectar la tarjeta al PC donde se instalo el SDK Manager mediante el puerto C frontal usando el cable usb-c a usb que viene en la caja del producto.
+* Presionar los botones de power y reset de la tarjeta por unos segundos y luego soltarlos para resetear la tarjeta lo que permitira al SDK manager reconocer la tarjetam una vez la reconoce sera posible seguir los pasos del SDK hasta que la instalacion este terminada.
+
+# Instalacion de CustomNet en Jetson Xavier AGX
+
+Una vez terminada la instalacion mediante SDK manager, deberias ser capaz de hacer `sudo apt-get update` y `sudo apt-get upgrade`, luego de instalar python3 en los siguientes pasos, deberias poder hacer `python3` e importar tensorrt  `import tensorrt as trt` sin problemas, lo que signidica que tensorrt esta instalado (estte deberia venir en el sistema instalado por SDK Manager).
+
+* install pip: en la Terminal de la tarjeta usar el siguiente comando
+```
+sudo apt install python3-pip
+```
+
+* instalar python3-dev para evitar errores en otras instalaciones segun `https://stackoverflow.com/questions/26053982/setup-script-exited-with-error-command-x86-64-linux-gnu-gcc-failed-with-exit`
+```
+sudo apt-get install python3-dev
+```
+obs: este ya deberia estar instalado x los pasos anteriores.
+
+* Instalar pytorch descarga el wheel deseado de esta pagina: `https://forums.developer.nvidia.com/t/pytorch-for-jetson/72048` y en la terminal, dentro de la carpeta donde se descargo el archivo ejecutar:
+```
+pip install archivo.wheel
+```
+
+*
+
+
+
+
+
 
 # Referencias
 
