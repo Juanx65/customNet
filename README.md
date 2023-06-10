@@ -214,7 +214,16 @@ Luego puedes proceder a instalar pycuda:
 ```
 pip install pycuda --user
 ```
+* instalar onnx:
+```
+sudo pip install onnx
+```
+
 * Descargar el repo con git clone ...
+* Dejare un link con el dataset para calibrar int8 y un link con el peso best.pth para no tener que entrenar la red en la tarjeta... luego de descargar esos se puede proceder con lo siguientes pasos
+* Transformar los pesos a onnx con `python3 onnx_transform.py`
+* Crear el engine con `python3 build_trt --int8` (si no esta descargado el dataset de prueba, añadir download=True en la linea donde se carga el dataset)
+* Probar el engine con `python3 evalCustomNetRT`
 
 --- 
 
