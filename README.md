@@ -169,17 +169,54 @@ sudo apt-get install python3-dev
 ```
 obs: este ya deberia estar instalado x los pasos anteriores.
 
+* Necesario para algunos errores como `ImportError: libopenblas.so.0: cannot open shared object file: No such file or directory`
+```
+sudo apt-get install libopenblas-dev
+```
+
 * Instalar pytorch descarga el wheel deseado de esta pagina: `https://forums.developer.nvidia.com/t/pytorch-for-jetson/72048` y en la terminal, dentro de la carpeta donde se descargo el archivo ejecutar:
 ```
-pip install archivo.wheel
+sudo pip install archivo.whl
+```
+obs: es necesario usar `sudo`para que se instale dentro de los archivos de `usr/local/python3..` en vez de los archivos de `home`.
+
+para probar la instalacion entra desde la terminal usando `python3`dentro de la terminal de python3:
+```
+import torch
+torch.cuda.is_available()
+```
+a lo cual deberia decir "True"
+
+* Instalar `torchvision` segun `https://forums.developer.nvidia.com/t/pytorch-for-jetson/72048/13`
+```
+git clone https://github.com/pytorch/vision
+cd vision
+sudo python setup.py install
 ```
 
-*
+* Install `pycuda` 
+Antes instala nano `sudo apt-get install nano`
+con `nano ~/.bashrc` revisa que al final de este archivo se exporte las versiones de cuda correspondientes:
+```
+export PATH=/usr/local/cuda-11.4/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/cuda-11.4/lib64:$LD_LIBRARY_PATH
+export CPATH=/usr/local/cuda-11.4/targets/aarch64-linux/include:$CPATH
+export LIBRARY_PATH=/usr/local/cuda-11.4/targets/aarch64-linux/lib:$LIBRARY_PATH
+```
+luego, para que los cambios sean efectivos:
+```
+source ~/.bashrc
+```
+(revisar `https://forums.developer.nvidia.com/t/pycuda-installation-failure-on-jetson-nano/77152/11`)
+para verificar que este paso se hizo correctamente al correr `nvcc --version` en cosola, deberia decir la version de cuda instalada.
 
+Luego puedes proceder a instalar pycuda:
+```
+pip install pycuda --user
+```
+* Descargar el repo con git clone ...
 
-
-
-
+--- 
 
 # Referencias
 
