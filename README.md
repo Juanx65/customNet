@@ -224,6 +224,11 @@ sudo pip install onnx
 * Transformar los pesos a onnx con `python3 onnx_transform.py`
 * Crear el engine con `python3 build_trt --int8` (si no esta descargado el dataset de prueba, añadir download=True en la linea donde se carga el dataset)
 * Probar el engine con `python3 evalCustomNetRT`
+---
+# Profiling en la Jetson Xavier
+* De los pasos anteriores ya se deberia de generar el profile, para poder ver los resultados instalar tensorboard con `pip install torch_tb_profiler`
+* Para poder visaulizarlos, se necesita chrome, por lo que debes instalarlo: `sudo apt install chromium-browser`
+* correr en la terminal `tensorboard --logdir=./log` y buscar en el navegador de chrome `http://localhost:6006/`
 
 --- 
 
