@@ -231,7 +231,9 @@ sudo pip install onnx
 * correr en la terminal `tensorboard --logdir=./log` y buscar en el navegador de chrome `http://localhost:6006/`
 
 --- 
-
+# VNC SERVER 
+* Nos conectaremos a la jetson Xavier mediante VNC siguiento este tutorial: `https://developer.nvidia.com/embedded/learn/tutorials/vnc-setup`
+* 
 # Referencias
 
 * pytorch profiler stable: `https://pytorch.org/docs/stable/profiler.html`
