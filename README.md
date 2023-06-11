@@ -232,8 +232,34 @@ sudo pip install onnx
 
 --- 
 # VNC SERVER 
-* Nos conectaremos a la jetson Xavier mediante VNC siguiento este tutorial: `https://developer.nvidia.com/embedded/learn/tutorials/vnc-setup`
-* 
+* Nos conectaremos a la jetson Xavier mediante VNC siguiento este tutorial: `https://developer.nvidia.com/embedded/learn/tutorials/vnc-setup`:
+* Enable the VNC server to start each time you log in
+```
+cd /usr/lib/systemd/user/graphical-session.target.wants
+sudo ln -s ../vino-server.service ./.
+```
+* Configure the VNC server
+```
+gsettings set org.gnome.Vino prompt-enabled false
+gsettings set org.gnome.Vino require-encryption false
+```
+* Set a password to access the VNC server
+```
+# Replace thepassword with your desired password
+gsettings set org.gnome.Vino authentication-methods "['vnc']"
+gsettings set org.gnome.Vino vnc-password $(echo -n 'thepassword'|base64)
+```
+* Reboot the system so that the settings take effect
+```
+sudo reboot
+```
+* Luego para conectarse del lado del PC de escritorio, usando ubuntu:
+```
+sudo apt update
+sudo apt install gvncviewer
+gvncviewer <IP de la Jetson>
+```
+--- 
 # Referencias
 
 * pytorch profiler stable: `https://pytorch.org/docs/stable/profiler.html`
