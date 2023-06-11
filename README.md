@@ -214,6 +214,10 @@ Luego puedes proceder a instalar pycuda:
 ```
 pip install pycuda --user
 ```
+obs: no pudiemos hacer la instalacion usando sudo, por algun error, para poder usar pycuda y que lo reconozca nvida nsight (para hacer profiling) es necesario linkear este paquete al resto de paquetes instalados con sudo con el siguiente comando:
+```
+sudo ln -s /home/<user_name>/.local/lib/python3.8/site-packages/pycuda /usr/local/lib/python3.8/dist-packages
+```
 * instalar onnx:
 ```
 sudo pip install onnx
