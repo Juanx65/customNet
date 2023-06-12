@@ -4,7 +4,7 @@ from io import BytesIO
 
 from models.customNet import ConvNet
 
-BATCH_SIZE = 4096
+BATCH_SIZE = 2048
 
 # Ruta al archivo .hdf5 con los pesos
 weights_path = 'weights/best.pth'

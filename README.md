@@ -43,12 +43,12 @@ Estos resultados son obtenidos al correr todo el dataset de purebas (~ 10000 ima
 | Vanilla     |                 |                      |1,7        |99.02        |     
 |             | CPU Total       |  17.975              |||
 |             | CUDA Total      |  17.982              |||
-| TRT fp16    |                 |                      |0.907        |98.97      |
-|             | CPU Total       |  14.071              |||        
-|             | CUDA Total      |  14.070              |||     
 | TRT fp32    |                 |                      |1.8        |98.97        |
 |             | CPU Total       |  13.952              |||        
 |             | CUDA Total      |  13.951              |||   
+| TRT fp16    |                 |                      |0.907        |98.97      |
+|             | CPU Total       |  14.071              |||        
+|             | CUDA Total      |  14.070              |||     
 | TRT int8    |                 |                      |0.499       |97.70       |
 |             | CPU Total       |  14.122              ||        
 |             | CUDA Total      |  14.121              |||     
@@ -67,21 +67,27 @@ Estos resultados son obtenidos al correr todo el dataset de purebas (~ 10000 ima
 
 |  Model      | Stage           |Time duration (us)    | Percentage (%) |  size (MB)| accuracy (%)|
 |-------------|-----------------|----------------------|----------------|-----------|-------------|
-| Vanilla     |                 |  1.084.332           |100             |1,7        |99.2         |     
-|             | Kernel          |  39.064              | 3,6            |||
-|             | Memcpy          |  9.708               | 0,9            |||
-|             | CPU Exec        |  436.668             | 40,27          |||
-|             | Other           |  598.889             | 55.23          |||
-| TRT fp16    |                 |  972.304             |100             |1,1        |99.18        |
-|             | Kernel          |  17.783              |1,83            |||        
-|             | Memcpy          |  9.710               |1               |||     
-|             | CPU Exec        |  344.756             |35,46           |||
-|             | Other           |  600.055             |61.71           |||
-| TRT fp32    |                 |  1,091,613           |100             |2,1        |98.97         |
-|             | Kernel          |  19,417              |1.78            |||        
-|             | Memcpy          |  9,722               |0.89            |||     
-|             | CPU Exec        |  414,413             |37.96           |||
-|             | Other           |  648,061             |59.37           |||
+| Vanilla     |                 |  1.150.770           |100             |1,7        |99.2         |     
+|             | Kernel          |  38.751              | 3.37           |||
+|             | Memcpy          |  9.722               | 0.83           |||
+|             | CPU Exec        |  471.347             | 40,96          |||
+|             | Other           |  630.946             | 54.83          |||
+| TRT fp32    |                 |  2.155.355           |100             |2,2        |98.97         |
+|             | Kernel          |  19,211              |0.89            |||        
+|             | Memcpy          |  9,747               |0.45            |||     
+|             | CPU Exec        |  1.505.493           |69.85           |||
+|             | Other           |  620.904             |28.81           |||
+| TRT fp16    |                 |  2,170,024           |100             |1,1        |98.97        |
+|             | Kernel          |  8,378	             |0.39            |||        
+|             | Memcpy          | 9,706                |0.45            |||     
+|             | CPU Exec        |  1,521,359           |70.11           |||
+|             | Other           |  630,581             |29.06           |||
+| TRT int8    |                 |  3,118,408           |100             |0.894      |97.86        |
+|             | Kernel          |  4,722               |0.15            |||        
+|             | Memcpy          | 9,690                |0.31            |||     
+|             | CPU Exec        |  2,466,560           |79.1            |||
+|             | Other           |  637,436             |20.44           |||
+
 
 * obs: Kernel: kernel execution time on GPU device;
        Memcpy: GPU involved memory compy time;

@@ -9,7 +9,7 @@ from torch.profiler import profile, record_function, ProfilerActivity
 
 from models.customNet import ConvNet
 
-BATCH_SIZE = 4096
+BATCH_SIZE = 2048
 
 ## Inicialización del modelo
 model = ConvNet()

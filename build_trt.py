@@ -2,13 +2,13 @@ import argparse
 
 from models.engine import EngineBuilder
 
-BATCH_SIZE = 128
+BATCH_SIZE = 2048
 
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('--weights',
                         type=str,
-                        default='weights/best128.onnx',
+                        default='weights/best.onnx',
                         help='Weights file')
     parser.add_argument('--input_shape',
                         nargs='+',
