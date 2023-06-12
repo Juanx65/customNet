@@ -30,8 +30,38 @@ correr red optimizada con TRT: `python evalCustomNetRT.py`
 para poder ver los logs generados en los profilers: `tensorboard --logdir=./log`, luego en el navegador de chrome, buscar `http://localhost:6006/`
 
 # Resultados
+## Pythorch Profiler
+### Plataforma: Jetson Xavier
+* CPU: ARMv8 Processor rev 0 (v8l) × 4
+* GPU: NVIDIA Tegra Xavier (nvgpu)/integrated
+* RAM: 16 Gb
+* SO: Ubuntu 20.04
+Estos resultados son obtenidos al correr todo el dataset de purebas (~ 10000 imagenes).
+### summary table batch size 2048
+|  Model      | Stage           |Time duration (s)     | size (MB)| accuracy (%)|
+|-------------|-----------------|----------------------|-----------|-------------|
+| Vanilla     |                 |                      |1,7        |99.02        |     
+|             | CPU Total       |  17.975              |||
+|             | CUDA Total      |  17.982              |||
+| TRT fp16    |                 |                      |0.907        |98.97      |
+|             | CPU Total       |  14.071              |||        
+|             | CUDA Total      |  14.070              |||     
+| TRT fp32    |                 |                      |1.8        |98.97        |
+|             | CPU Total       |  13.952              |||        
+|             | CUDA Total      |  13.951              |||   
+| TRT int8    |                 |                      |0.499       |97.70       |
+|             | CPU Total       |  14.122              ||        
+|             | CUDA Total      |  14.121              |||     
+
+
+---
 
 ## TensorBoard Profiler
+### Plataforma: PC Escritorio
+* CPU: i3 1200F
+* GPU: Nvidia RTX 3060 
+* RAM: 32 Gb 3200 MHz
+* SO: Ubuntu 22.04
 Estos resultados son obtenidos al correr todo el dataset de purebas (~ 10000 imagenes).
 ### summary table batch size 2048
 
