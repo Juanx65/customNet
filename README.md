@@ -223,15 +223,7 @@ torch.cuda.is_available()
 ```
 a lo cual deberia decir "True"
 
-* Instalar `torchvision` segun `https://forums.developer.nvidia.com/t/pytorch-for-jetson/72048/13`
-```
-git clone https://github.com/pytorch/vision
-cd vision
-sudo python setup.py install
-```
-
-* Install `pycuda` 
-Antes instala nano `sudo apt-get install nano`
+* Instala nano `sudo apt-get install nano`
 con `nano ~/.bashrc` revisa que al final de este archivo se exporte las versiones de cuda correspondientes:
 ```
 export PATH=/usr/local/cuda-11.4/bin:$PATH
@@ -246,7 +238,21 @@ source ~/.bashrc
 (revisar `https://forums.developer.nvidia.com/t/pycuda-installation-failure-on-jetson-nano/77152/11`)
 para verificar que este paso se hizo correctamente al correr `nvcc --version` en cosola, deberia decir la version de cuda instalada.
 
-Luego puedes proceder a instalar pycuda:
+* Instalar `torchvision` segun `https://forums.developer.nvidia.com/t/pytorch-for-jetson/72048/13`
+```
+git clone https://github.com/pytorch/vision
+cd vision
+sudo python3 setup.py install
+```
+obs: para la tarjta jetson TX2, es necesario instalar una version anterior, ya que esta solo trabaja con torch 1.10.0, segun `https://medium.com/hackers-terminal/installing-pytorch-torchvision-on-nvidias-jetson-tx2-81591d03ce32`
+```
+git clone -b v0.3.0 https://github.com/pytorch/vision torchvision
+cd torchvision
+sudo python3 setup.py install
+```
+
+* Install `pycuda` 
+
 ```
 pip install pycuda --user
 ```
@@ -300,6 +306,13 @@ sudo apt install gvncviewer
 gvncviewer <IP de la Jetson>
 ```
 --- 
+
+obs:
+* Es necesario usar python3 para ambas tarjetas, en lugar de solo python
+* Es necesario usar pip3 en lugar de pip para la jetson TX2
+
+---
+
 # Referencias
 
 * pytorch profiler stable: `https://pytorch.org/docs/stable/profiler.html`
