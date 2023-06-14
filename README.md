@@ -265,6 +265,16 @@ sudo ln -s /home/<user_name>/.local/lib/python3.8/site-packages/pycuda /usr/loca
 sudo pip install onnx
 ```
 
+obs: para installar onnx en jetson TX2 es necesario:
+```
+sudo apt update
+sudo apt-get install python3-pip
+sudo apt-get install cmake libprotobuf-dev protobuf-compiler
+sudo pip3 install Cython
+sudo pip3 install onnx==1.4.1
+```
+segun `https://forums.developer.nvidia.com/t/can-not-install-onnx-1-4-1-on-jetson-tx2/173354/5`
+
 * Descargar el repo con git clone ...
 * Dejare un link con el dataset para calibrar int8 y un link con el peso best.pth para no tener que entrenar la red en la tarjeta... luego de descargar esos se puede proceder con lo siguientes pasos
 * Transformar los pesos a onnx con `python3 onnx_transform.py`
