@@ -275,6 +275,11 @@ sudo pip3 install onnx==1.4.1
 ```
 segun `https://forums.developer.nvidia.com/t/can-not-install-onnx-1-4-1-on-jetson-tx2/173354/5`
 
+* pillow 9, solo para la jetson TX2:
+
+`sudo pip3 install 'pillow<9'`
+segun `https://github.com/dusty-nv/jetson-inference/issues/1534`
+
 * Descargar el repo con git clone ...
 * Dejare un link con el dataset para calibrar int8 y un link con el peso best.pth para no tener que entrenar la red en la tarjeta... luego de descargar esos se puede proceder con lo siguientes pasos
 * Transformar los pesos a onnx con `python3 onnx_transform.py`
