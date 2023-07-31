@@ -53,6 +53,13 @@ Estos resultados son obtenidos al correr todo el dataset de purebas (~ 10000 ima
 |             | CPU Total       |  14.122              ||        
 |             | CUDA Total      |  14.121              |||     
 
+|  Model      |Time duration (s)     | size (MB)| accuracy (%)|
+|-------------|----------------------|-----------|-------------|
+| Vanilla     |    17,98             |1,7        |99.02        |    
+| TRT fp32    |  13,95                  |1.8        |98.97        |
+| TRT fp16    |   14,07                   |0.907        |98.97      |
+| TRT int8    |   14,12                  |0.499       |97.70       |
+
 
 ---
 
@@ -87,6 +94,13 @@ Estos resultados son obtenidos al correr todo el dataset de purebas (~ 10000 ima
 |             | Memcpy          | 9,690                |0.31            |||     
 |             | CPU Exec        |  2,466,560           |79.1            |||
 |             | Other           |  637,436             |20.44           |||
+
+|  Model      | Time duration (s)    |  size (MB)| accuracy (%)|
+|-------------|----------------------|-----------|-------------|
+| Vanilla     |     1,15                   |1,7        |99.2         |     
+| TRT fp32    |       2,16                      |2,2        |98.97         |
+| TRT fp16    |      2,17                       |1,1        |98.97        |
+| TRT int8    |          3,12                     |0,894      |97.86        |
 
 
 * obs: Kernel: kernel execution time on GPU device;
